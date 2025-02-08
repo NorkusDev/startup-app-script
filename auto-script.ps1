@@ -9,7 +9,14 @@
 
 # Scan Dir Based
 # Define the base directory
+# $baseDir = "D:\Project\Farm\App\Golang\parameter-service\tmp"
+# Same Folder
+# $apps = Get-ChildItem -Path $baseDir -Filter "*.exe" | Sort-Object Name | Select-Object -ExpandProperty FullName
+
+# Scan Dir Based
+# Define the base directory
 $baseDir = "D:\Sample"
+# Multi Folder
 # Define the subdirectories
 $serviceDirs = @(
     "sample\path",
@@ -69,7 +76,7 @@ Start-Sleep $delay
 # Run App
 foreach ($app in $apps) {
     try {
-        Start-Process $app
+        Start-Process $app -ErrorAction SilentlyContinue
     }
     catch {
         Add-Content -Path $log -Value "$(Get-Date) Failed to start app-name : $app -$_"
