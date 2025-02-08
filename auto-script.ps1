@@ -1,5 +1,5 @@
-# Manual Dir Based
-# Define Dir Apps
+## Manual Dir Based
+## Define Dir Apps
 # $apps = @(
 #     "D:\sample\main.exe"
 #     "D:\sample\main.exe",
@@ -7,41 +7,41 @@
 #     "D:\sample\main.exe"
 # )
 
-# Scan Dir Based
-# Define the base directory
+## Scan Dir Based
+## Define the base directory
 # $baseDir = "D:\Project\Farm\App\Golang\parameter-service\tmp"
-# Same Folder
+## Same Folder
 # $apps = Get-ChildItem -Path $baseDir -Filter "*.exe" | Sort-Object Name | Select-Object -ExpandProperty FullName
 
-# Scan Dir Based
-# Define the base directory
-$baseDir = "D:\Sample"
-# Multi Folder
-# Define the subdirectories
-$serviceDirs = @(
-    "sample\path",
-    "sample\path",
-    "sample\path",
-    "sample\path"
-)
+## Scan Dir Based
+## Define the base directory
+# $baseDir = "D:\Sample"
+## Multi Folder
+## Define the subdirectories
+# $serviceDirs = @(
+#     "sample\path",
+#     "sample\path",
+#     "sample\path",
+#     "sample\path"
+# )
 
 # Define executable app name
-$executableName = "main.exe"
+# $executableName = "main.exe"
 
-# Build the $apps array by searching for executable
-$apps = foreach ($subDir in $serviceDirs) {
-    # Combine path
-    $fullPath = Join-Path -Path $baseDir -ChildPath $subDir
-    # Look for the executable
-    $exeFile = Get-ChildItem -Path $fullPath -Filter $executableName -ErrorAction SilentlyContinue | Select-Object -First 1
-    if ($exeFile) {
-        $exeFile.FullName
-    } else {
-        Write-Warning "$executableName not found in $fullPath"
-    }
-}
+## Build the array by searching for executable
+# $apps = foreach ($subDir in $serviceDirs) {
+#     # Combine path
+#     $fullPath = Join-Path -Path $baseDir -ChildPath $subDir
+#     # Look for the executable
+#     $exeFile = Get-ChildItem -Path $fullPath -Filter $executableName -ErrorAction SilentlyContinue | Select-Object -First 1
+#     if ($exeFile) {
+#         $exeFile.FullName
+#     } else {
+#         Write-Warning "$executableName not found in $fullPath"
+#     }
+# }
 
-# DEfine name services may run first
+# Define name services may run first
 $services = @(
     "sample-service",
     "sample-service",
@@ -70,6 +70,7 @@ foreach ($service in $services) {
     Start-Sleep 2
 }
 
+# Add Delay In Seconds
 Add-Content -Path $log -Value "$(Get-Date) Add delay $delay Seconds Waiting for other services start"
 Start-Sleep $delay
 
